@@ -1,6 +1,8 @@
 # BiBI-Wiper-Analysis
 
-Security Researchers discovered that Threat actors now using OneNote attachments in phishing emails that infect victims with remote access malware which can be used to install further malware, steal passwords, or even cryptocurrency wallets.
+On 30th October, Security Joes posted its findings about a Wiper malware for Linux systems used in the war in Gaza. It was called the "BiBi-Linux Wiper".And then on November 1 2023, BlackBerry Research and Intelligence Team found its Windows variant.
+
+In this post, we will look at the Windows version of the BiBi Wiper known as the "BiBi-Windows Wiper"
 
 ## Malware Sample
 
@@ -178,4 +180,4 @@ rule malicious_onenote {
 
 ## References :
 
-- 
+- https://www.linkedin.com/pulse/bibi-wiper-gaza-war-now-goes-windows-dmitry-bestuzhev-yftze/#
