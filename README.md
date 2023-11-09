@@ -40,11 +40,11 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
 
 - Upon execution, the Wiper fetches the number of processors, calculates the threads accordingly using ```GetNativeSystemInfo()``` and prints the target directories and thread information on the console.
 
-  ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/2ffc724a-5589-4908-aba7-97d85b3947d8)
-
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/6e861f06-9bfa-484b-8e33-9fe210bf5080)
 
 - It reads the hardcoded path: "C:\Users".
+
+  ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/2ffc724a-5589-4908-aba7-97d85b3947d8)
 
 - Gets the currently available disk drives using ```GetLogicalDrives()``` where the return value is the bitmask, then it iterates through the A-Z (26) drives. It next does a bittest with the retrieved bitmask to determine the accessible drives on the system and appends ":\" to the drive name.
 
@@ -58,10 +58,11 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
   
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/17c36a31-5357-47c1-9808-d81c5152d290)
 
-- Further it creates a new thread which reads the commands stored in reverse, & then creates a new process using CreateProcessA to execute those commands. Following are the commands
+- Further it creates a new thread which reads the commands stored in reverse, & then creates a new process using CreateProcessA to execute those commands. 
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/58b8cf73-4814-4d49-8f21-4e5cc5281e61)
 
+- Following are the commands executed by Bibi.
 
     > ***`cmd.exe /c bcdedit /set {default} recoveryenabled no`*** - Disables Windows Recovery Environment
     
