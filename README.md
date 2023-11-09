@@ -64,21 +64,21 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
 
 - Following are the commands executed by Bibi.
 
-    > ***`cmd.exe /c bcdedit /set {default} recoveryenabled no`*** - Disables Windows Recovery Environment
+    1.  `cmd.exe /c bcdedit /set {default} recoveryenabled no` - Disables Windows Recovery Environment
     
-  ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/e46067ef-fec9-49fb-9f9d-501d8f831e30)
+    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/e46067ef-fec9-49fb-9f9d-501d8f831e30)
     
-    > ***`cmd.exe / c bcdedit / set {default} bootstatuspolicy ignoreallfailures`*** - Force the system to boot normally rather than into the Windows Recovery Environment
+    2.  `cmd.exe / c bcdedit / set {default} bootstatuspolicy ignoreallfailures` - Force the system to boot normally rather than into the Windows Recovery Environment
 
-  ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/4703d6f2-c279-42d3-99a5-82e93058c994)
+    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/4703d6f2-c279-42d3-99a5-82e93058c994)
     
-    > ***`cmd.exe /c wmic shadowcopy delete`*** - Delete Volume Shadow Copies using WMIC
+    3.  `cmd.exe /c wmic shadowcopy delete`  - Delete Volume Shadow Copies using WMIC
     
-  ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/dd7ff501-a1b8-4798-992a-a2e9bc1afb4e)
+    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/dd7ff501-a1b8-4798-992a-a2e9bc1afb4e)
 
-    > ***`cmd.exe /c vssadmin delete shadows /quIet /all`*** - Delete Volume Shadow Copies using VssAdmin
+    4.  `cmd.exe /c vssadmin delete shadows /quIet /all` - Delete Volume Shadow Copies using VssAdmin
 
-  ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/ff89dacb-12ef-47fd-9086-21d26c15256b)
+    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/ff89dacb-12ef-47fd-9086-21d26c15256b)
 
  -  Furthermore it creates another thread which executes of the Main Wiper routines. The Wiper routines perform the following actions.
 
