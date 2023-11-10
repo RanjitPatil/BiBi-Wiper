@@ -40,7 +40,7 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
 
 - Upon execution, the BiBi-Windows Wiper checks to see if any arguments have been passed to the BiBi Wiper to destroy the directory, If no argument is provided then it performs the following actions.
 
-- Wiper fetches the number of processors, calculates the threads accordingly using GetNativeSystemInfo() and prints the target directories and thread information on the console.
+- Wiper fetches the number of processors, calculates the threads accordingly using ```GetNativeSystemInfo()``` and prints the target directories and thread information on the console.
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/6e861f06-9bfa-484b-8e33-9fe210bf5080)
 
@@ -48,9 +48,9 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/2ffc724a-5589-4908-aba7-97d85b3947d8)
 
-- After that it Iterates through the A-Z (26) disk drives using GetLogicalDrives(), where the return result is the bitmask. It next does a bittest with the received bitmask to determine the system's accessible drives and appends ":" to the drive name.
+- After that it Iterates through the A-Z (26) disk drives using ```GetLogicalDrives()```, where the return result is the bitmask. It next does a bittest with the received bitmask to determine the system's accessible drives and appends ":" to the drive name.
 
-- Then, except for the C drive, it calls the GetDriveTypeA() function, which returns the drive type. The BiBi-Windows Wiper exclusively targets the following drive types:
+- Then, except for the C drive, it calls the ```GetDriveTypeA()``` function, which returns the drive type. The BiBi-Windows Wiper exclusively targets the following drive types:
 
     DRIVE_FIXED
 
