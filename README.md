@@ -38,31 +38,33 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
   
 ## Dynamic Analysis 
 
-- Upon execution, the Wiper fetches the number of processors, calculates the threads accordingly using ```GetNativeSystemInfo()``` and prints the target directories and thread information on the console.
+- Upon execution, the BiBi-Windows Wiper checks to see if any arguments have been passed to the BiBi Wiper to destroy the directory, If no argument is provided then it performs the following actions.
+
+- Wiper fetches the number of processors, calculates the threads accordingly using GetNativeSystemInfo() and prints the target directories and thread information on the console.
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/6e861f06-9bfa-484b-8e33-9fe210bf5080)
 
-- It reads the hardcoded path: "C:\Users".
+- Then it reads the hardcoded path: "C:\Users".
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/2ffc724a-5589-4908-aba7-97d85b3947d8)
 
-- Gets the currently available disk drives using ```GetLogicalDrives()``` where the return value is the bitmask, then it iterates through the A-Z (26) drives. It next does a bittest with the retrieved bitmask to determine the accessible drives on the system and appends ":\" to the drive name.
+- After that it Iterates through the A-Z (26) disk drives using GetLogicalDrives(), where the return result is the bitmask. It next does a bittest with the received bitmask to determine the system's accessible drives and appends ":" to the drive name.
 
-- Then for the available drives except the C drive it executes the ```GetDriveTypeA()``` which retrives the drive type, The BiBi-Windows Wiper here only targets the following drive types:
+- Then, except for the C drive, it calls the GetDriveTypeA() function, which returns the drive type. The BiBi-Windows Wiper exclusively targets the following drive types:
 
-  DRIVE_FIXED
-  
-  DRIVE_REMOVABLE
-  
-  DRIVE_RAMDISK
-  
+    DRIVE_FIXED
+
+    DRIVE_REMOVABLE
+
+    DRIVE_RAMDISK
+
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/17c36a31-5357-47c1-9808-d81c5152d290)
 
-- Further it creates a new thread which reads the commands stored in reverse, & then creates a new process using ```CreateProcessA()``` to execute those commands. 
+- Further, it creates a new thread that reads the commands stored in reverse and then creates a new process using ```CreateProcessA()``` to execute those commands.
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/58b8cf73-4814-4d49-8f21-4e5cc5281e61)
 
-- Following are the commands executed by Bibi.
+- Following are the commands executed by Bibi Wiper.
 
     1.  `cmd.exe /c bcdedit /set {default} recoveryenabled no` - Disables Windows Recovery Environment
     
@@ -80,28 +82,75 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
 
     ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/ff89dacb-12ef-47fd-9086-21d26c15256b)
 
- -  Furthermore it creates another thread which executes of the Main Wiper routines. The Wiper routines perform the following actions.
+ -  After identifying accessible drives and their types, BiBi-Windows Wiper takes additional steps by creating a separate thread to execute the main wiping routines. These routines require two arguments: the path of the directory to be destroyed (either provided by the operator or retrieved earlier) and the specified number of threads.
 
- -  Arg1 - Path of the Directory to be destroyed (Could be provided by the Operator or retrieved as explained before)
+ -  The wiper then enters an infinite loop where the counter corresponds to the round number, printing "[+] Round %d\n" for each iteration. This indicates that once initiated, the Wiper continuously destroys data in an infinite loop.
 
- -  Arg2 - Number of threads
-
- -  Then it initiates an infinite loop where the counter is the Round "[+] Round %d\n" value - therefore once the Wiper is executed it would keep destroying the data infinitely
-
- -  Further based on the number of threads, it creates multiple threads in a loop which execute the main Wiper function.
-
- -  The BiBi-Windows wiper excludes the files with ".exe", ".dll" and ".sys" extension
+ -  To optimize the process, the wiper creates multiple threads based on the specified number, executing the main wiping function within a loop. Notably, the BiBi-Windows Wiper is designed to exclude files with ".exe," ".dll," and ".sys" extensions from its destructive actions.
 
     ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/fa9c594d-d9d0-4329-a369-7b7877436fd0)
 
--  BiBi-Windows Wiper execution showcasing the Target directory, CPU Cores, Threads, Round Number, Stats, and destroyed file with .BiBi extension
-
-    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/d8e78456-66a9-47fd-a73e-ada5faf7bb9a)
-   
--  The Wiper changes the name of the destroyed files using the Mersenne Twister function again. The generated random number undergoes a modulus operation with a hardcoded value, creating an index in a wide string. This index is then used to form a unique filename, appended with ".BiBi" and the round number.
+-  The Wiper function implements the Mersenne Twister PseudoRandom Number Generator Algorithm which generates random numbers. Then Wiper changes the name of the destroyed files using the Mersenne Twister function again. The generated random number undergoes a modulus operation with a hardcoded value, creating an index in a wide string. This index is then used to form a unique filename, appended with ".BiBi" and the round number.
 
     ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/b5ad5de1-60eb-4261-9448-344a62fc8e17)
 
+   ```
+   v2 = 624i64;
+   v3 = *a1;
+    if ( v3 == 624 )
+    {
+    v4 = a1 + 2;
+    do
+    {
+      v5 = *v4 ^ *(v4 - 1);
+      ++v4;
+      v4[622] = ((*(v4 - 2) ^ v5 & 0x7FFFFFFFu) >> 1) ^ v4[395] ^ (((*((_BYTE *)v4 - 8) ^ (unsigned __int8)v5) & 1) != 0 ? 0x9908B0DF : 0);
+      --v2;
+    }
+    while ( v2 );
+    v3 = *a1;
+    }
+    else if ( v3 >= 0x4E0 )
+    {
+    v6 = a1 + 625;
+    v7 = a1[625];
+    v8 = 227i64;
+    do
+    {
+      v9 = v7 ^ (v7 ^ v6[1]) & 0x7FFFFFFF;
+      v7 = v6[1];
+      *(v6 - 624) = (v9 >> 1) ^ v6[397] ^ ((v6[1] & 1) != 0 ? 0x9908B0DF : 0);
+      ++v6;
+      --v8;
+    }
+    while ( v8 );
+    v10 = a1 + 852;
+    v11 = 396i64;
+    v12 = a1[852];
+    do
+    {
+      v13 = v12 ^ (v10[1] ^ v12) & 0x7FFFFFFF;
+      v12 = v10[1];
+      *(v10 - 624) = (v13 >> 1) ^ *(v10 - 851) ^ ((v10[1] & 1) != 0 ? 0x9908B0DF : 0);
+      ++v10;
+      --v11;
+    }
+    while ( v11 );
+    a1[624] = ((a1[1248] ^ (a1[1] ^ a1[1248]) & 0x7FFFFFFF) >> 1) ^ a1[397] ^ ((a1[1] & 1) != 0 ? 0x9908B0DF : 0);
+    v3 = 0;
+    *a1 = 0;
+    }
+    v14 = a1[v3 + 1];
+    *a1 = v3 + 1;
+    v15 = ((((v14 >> 11) & a1[1249] ^ v14) & 0xFF3A58AD) << 7) ^ (v14 >> 11) & a1[1249] ^ v14;
+    return ((v15 & 0xFFFFDF8C) << 15) ^ v15 ^ ((((v15 & 0xFFFFDF8C) << 15) ^ v15) >> 18);
+    }
+   
+    ```
+-  Below output shows the Target directory, CPU Cores, Threads, Round Number, Stats, and destroyed file with .BiBi extension.
+
+    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/d8e78456-66a9-47fd-a73e-ada5faf7bb9a)
+   
 
 ## YARA Rule
 
