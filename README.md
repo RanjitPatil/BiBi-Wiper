@@ -58,7 +58,7 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
   
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/17c36a31-5357-47c1-9808-d81c5152d290)
 
-- Further it creates a new thread which reads the commands stored in reverse, & then creates a new process using CreateProcessA to execute those commands. 
+- Further it creates a new thread which reads the commands stored in reverse, & then creates a new process using ```CreateProcessA()``` to execute those commands. 
 
   ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/58b8cf73-4814-4d49-8f21-4e5cc5281e61)
 
@@ -97,7 +97,10 @@ In this post, we will look at the Windows version of the BiBi Wiper known as the
 -  BiBi-Windows Wiper execution showcasing the Target directory, CPU Cores, Threads, Round Number, Stats, and destroyed file with .BiBi extension
 
     ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/d8e78456-66a9-47fd-a73e-ada5faf7bb9a)
+   
+-  The Wiper changes the name of the destroyed files using the Mersenne Twister function again. The generated random number undergoes a modulus operation with a hardcoded value, creating an index in a wide string. This index is then used to form a unique filename, appended with ".BiBi" and the round number.
 
+    ![image](https://github.com/RanjitPatil/BiBi-Wiper/assets/43460691/b5ad5de1-60eb-4261-9448-344a62fc8e17)
 
 
 ## YARA Rule
